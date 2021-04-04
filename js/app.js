@@ -34,6 +34,7 @@ function createChart(sample) {
         let otu_labels = dataArray[0].otu_labels;
         let sample_values = dataArray[0].sample_values;
 
+        // for bubble chart
         let bubbleData = [{
             x: otu_ids,
             y: sample_values,
@@ -54,8 +55,28 @@ function createChart(sample) {
             },
             margin: {t: 30}
         };
-
         Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
+        // for bar chart
+        let yticks = otu_ids.slice(0,10).map(function(otuID) {
+            return `OTU ${otuID}`;
+        }).reverse();
+
+        let barData = [{
+            y: yticks,
+            x: sample_values.slice(0,10).reverse(),
+            text: otu_labels.slice(0,10).reverse(),
+            type: "bar",
+            orientation: "h"
+        }];
+        let barLayout = {
+            title: `Top 10 Cultures for ID ${sample}`,
+            margin: {
+                t: 30,
+                l: 150
+            },
+        };
+        Plotly.newPlot("bar", barData, barLayout)
     });
 };
 
