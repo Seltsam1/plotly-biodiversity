@@ -28,6 +28,7 @@ Download folder structure to get started. See details in Features section
   - Provides functions to build charts based on the subject ID selected by user in dropdown menu
     - createChart function builds a bubble chart and a horizontal bar chart
     - createMetaData function fills in the panel with metadata based on Subject ID
+  - Includes commented out data for an additional chart that was not included in final dashboard 
 
 ## Licensing by:
 
