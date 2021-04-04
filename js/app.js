@@ -20,7 +20,7 @@ function init() {
         // call functions to build charts and demographic info
         createChart(firstSample);
         createMetaData(firstSample);
-        createGauge(firstSample);
+      //  createGauge(firstSample);
     });
 };
 
@@ -110,81 +110,97 @@ function createMetaData(sample) {
 function optionChanged(sample) {
     createChart(sample);
     createMetaData(sample);
-    createGauge(sample)
+   // createGauge(sample)
 };
 
-// BONUS - guage chart
-function createGauge(sample) {
-    d3.json("samples.json").then(function(data) {
-        let metadata = data.metadata;
-        let resultsArray = metadata.filter(function(data) {
-            return data.id == sample;
-        });
-        // calculations to determine angle of guage chart
-        let result = resultsArray[0].wfreq;
-        let value = parseFloat(result) * 20;
-        let degrees = 180 - value;
-        let radius = 0.5;
-        let radians = (degrees * Math.PI) / 180;
-        let x = radius * Math.cos(radians);
-        let y = radius * Math.cos(radians);
-        let mainPath = "M -.0 -0.05 L .0 0.05 L";
-        let pathX = String(x);
-        let space = " ";
-        let pathY = String(y);
-        let pathEnd = " Z";
-        let path = mainPath.concat(pathX, space, pathY, pathEnd);
+// // BONUS - guage chart
+// function createGauge(sample) {
+//     d3.json("samples.json").then(function(data) {
+//         let metadata = data.metadata;
+//         let resultsArray = metadata.filter(function(data) {
+//             return data.id == sample;
+//         });
+//         // calculations to determine angle of guage chart
+//         let result = resultsArray[0].wfreq;
+//         let value = parseFloat(result) * 20;
+//         let degrees = 180 - value;
+//         let radius = 0.5;
+//         let radians = (degrees * Math.PI) / 180;
+//         let x = radius * Math.cos(radians);
+//         let y = radius * Math.cos(radians);
+//         let mainPath = "M -.0 -0.05 L .0 0.05 L";
+//         let pathX = String(x);
+//         let space = " ";
+//         let pathY = String(y);
+//         let pathEnd = " Z";
+//         let path = mainPath.concat(pathX, space, pathY, pathEnd);
 
-        // create guage chart based on path
-        let guageData = [{
-            type: "scatter",
-            x: [0],
-            y: [0],
-            marker: {
-                size: 12,
-                color: "850000"
-            },
-            showLegend: false,
-            name: "Freq",
-            text: value,
-            hoverinfo: "text+name"
-            },
-            {values: [(50 / 9), (50 / 9), (50 / 9), (50 / 9),
-                (50 / 9), (50 / 9), (50 / 9), (50 / 9),
-                (50 / 9), (50 / 9)],
-            rotation: 90,
-            text: ["8-9", "7-8", "6-7", "5-6",
-                   "4-5", "3-4", "2-3", "1-2", "0-1", ""],
-            textinfo: "text",
-            textposition: "inside",
-            markers: {
-                colorscale: "Electric"
-            },
-            labels: ["8-9", "7-8", "6-7", "5-6",
-                   "4-5", "3-4", "2-3", "1-2", "0-1", ""],
-            hoverinfo: "label",
-            hole: 0.5,
-            type: "pie",
-            showlegend: false
-        }
-    ];
-    var layout = {
-        shape: [
-            {
-                type: "path",
-                path: path,
-                fillcolor: "c8a2c8",
-                line: {
-                    color: "c8a2c8"
-                }
-            }
-        ]
-    }
+//         // create guage chart based on path
+//         let gaugeData = [{
+//             type: "scatter",
+//             x: [0],
+//             y: [0],
+//             marker: {
+//                 size: 12,
+//                 color: "850000"
+//             },
+//             showLegend: false,
+//             name: "Freq",
+//             text: value,
+//             hoverinfo: "text+name"
+//             },
+//             {values: [(50 / 9), (50 / 9), (50 / 9), (50 / 9),
+//                 (50 / 9), (50 / 9), (50 / 9), (50 / 9),
+//                 (50 / 9), (50 / 9)],
+//             rotation: 90,
+//             text: ["8-9", "7-8", "6-7", "5-6",
+//                    "4-5", "3-4", "2-3", "1-2", "0-1", ""],
+//             textinfo: "text",
+//             textposition: "inside",
+//             markers: {
+//                 colorscale: "Electric"
+//             },
+//             labels: ["8-9", "7-8", "6-7", "5-6",
+//                    "4-5", "3-4", "2-3", "1-2", "0-1", ""],
+//             hoverinfo: "label",
+//             hole: 0.5,
+//             type: "pie",
+//             showlegend: false
+//         }
+//     ];
+//     var gaugeLayout = {
+//         shape: [
+//             {
+//                 type: "path",
+//                 path: path,
+//                 fillcolor: "c8a2c8",
+//                 line: {
+//                     color: "c8a2c8"
+//                 }
+//             }
+//         ],
+//         title: "<b>Belly Button Washing Frequency</b> <br> Scrub per Week",
+//         height: 500,
+//         width: 500,
+//         xaxis: {
+//             zeroline: false,
+//             showticklabels: false,
+//             shpwgrid: false,
+//             range: [-1,1]
+//         },
+//         yaxis: {
+//             zeroline: false,
+//             showticklabels: false,
+//             shpwgrid: false,
+//             range: [-1,1]
+//         }
+//     }
+//     let GAUGE = document.getElementById("guage");
+//     Plotly.newPlot(GAUGE, guageData, gaugeLayout)
 
-
-    });
+//     });
     
-};
+// };
 
 // call function init
 init();
