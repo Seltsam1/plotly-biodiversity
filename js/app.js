@@ -85,18 +85,21 @@ function createMetaData(sample) {
     d3.json("samples.json").then(function(data) {
         let metaData = data.metadata;
         let resultsArray = metaData.filter(function(data) {
-            return data.id === sample;
+            return data.id == sample;
         });
+        console.log(resultsArray)
         let result = resultsArray[0];
-        let panel = d3.select("#sample-metadata");
+        let PANEL = d3.select("#sample-metadata");
+
+        
 
         // reset exisisting metadata
-        panel.html("");
+        // PANEL.html("");
         
-        // loop through each object
-        Object.defineProperties(result).forEach(function([key, value]){
-            console.log(key, value)
-        })
+        // // loop through each object
+        // Object.entries(result).forEach(function([key, value]) {
+        //     PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`)
+        // });
 
     })
 }
