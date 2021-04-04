@@ -7,10 +7,21 @@ function init() {
     // load data from sample.json
     d3.json("samples.json").then(function(data) {
         console.log(data);
+
+        let namesData = data.names;
+        console.log(namesData)
+        namesData.forEach(function(names) {
+            selector.append("option")
+                .text(names)
+                .property("value", names)
+        });
+
+        
     });
 
     
 };
 
+// call function init
 init();
 
