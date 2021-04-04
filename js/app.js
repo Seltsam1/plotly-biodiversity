@@ -17,8 +17,10 @@ function init() {
 
         let firstSample = namesData[0];
 
+        // call functions to build charts and demographic info
         createChart(firstSample);
         createMetaData(firstSample);
+        createGauge(firstSample);
     });
 };
 
@@ -88,7 +90,6 @@ function createMetaData(sample) {
         let resultsArray = metadata.filter(function(data) {
             return data.id == sample;
         });
-        console.log(resultsArray);
         let result = resultsArray[0];
         let panel = d3.select("#sample-metadata");
 
@@ -106,6 +107,19 @@ function createMetaData(sample) {
 function optionChanged(sample) {
     createChart(sample);
     createMetaData(sample);
+};
+
+// BONUS - guage chart
+function createGauge(sample) {
+    d3.json("samples.json").then(function(data) {
+        let metadata = data.metadata;
+        let resultsArray = metadata.filter(function(data) {
+            return data.id == sample;
+        });
+        let result = resultsArray[0].wfreq;
+        console.log(result)
+    });
+    
 };
 
 // call function init
