@@ -26,6 +26,7 @@ function init() {
 function createChart(sample) {
     d3.json("samples.json").then(function(data) {
         let samples = data.samples;
+
         let dataArray = samples.filter(function(data) {
             return data.id === sample;
         });
@@ -33,15 +34,11 @@ function createChart(sample) {
         let otu_labels = dataArray[0].otu_labels;
         let sample_values = dataArray[0].sample_values;
 
-        console.log(otu_ids);
-        console.log(otu_labels);
-        console.log(sample_values);
-
         let bubbleData = [{
             x: otu_ids,
             y: sample_values,
             text: otu_labels,
-            mode: "markets",
+            mode: "markers",
             marker: {
                 size: sample_values,
                 color: otu_ids,
@@ -50,12 +47,12 @@ function createChart(sample) {
         }];
 
         let bubbleLayout = {
-            title: (`Bacteria Cultures for Subject ${sample}`),
-            margin: {t: 30},
+            title: `Bacteria Cultures for Subject ${sample}`,
             hovermode: "closest",
             xaxis: {
                 title: "OTU (Operational Taxonomic Unit) ID"
-            }
+            },
+            margin: {t: 30}
         };
 
         Plotly.newPlot("bubble", bubbleData, bubbleLayout);
