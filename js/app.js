@@ -17,7 +17,8 @@ function init() {
 
         let firstSample = namesData[0];
 
-        createChart(firstSample)
+        createChart(firstSample);
+        createMetaData(firstSample);
     });
 };
 
@@ -80,30 +81,26 @@ function createChart(sample) {
     });
 };
 
-// function to display metadata
+// function to display metadata in demographic panel
 function createMetaData(sample) {
     d3.json("samples.json").then(function(data) {
-        let metaData = data.metadata;
-        let resultsArray = metaData.filter(function(data) {
+        let metadata = data.metadata;
+        let resultsArray = metadata.filter(function(data) {
             return data.id == sample;
         });
-        console.log(resultsArray)
+        console.log(resultsArray);
         let result = resultsArray[0];
-        let PANEL = d3.select("#sample-metadata");
-
-        
+        let panel = d3.select("#sample-metadata");
 
         // reset exisisting metadata
-        // PANEL.html("");
+        panel.html("");
         
         // // loop through each object
-        // Object.entries(result).forEach(function([key, value]) {
-        //     PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`)
-        // });
-
-    })
-}
-
+        Object.entries(result).forEach(function([key, value]) {
+            panel.append("h6").text(`${key.toUpperCase()}: ${value}`)
+        });
+    });
+};
 
 // call function init
 init();
