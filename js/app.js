@@ -95,11 +95,17 @@ function createMetaData(sample) {
         // reset exisisting metadata
         panel.html("");
         
-        // // loop through each object
+        // // loop through each object and append data to panel
         Object.entries(result).forEach(function([key, value]) {
             panel.append("h6").text(`${key.toUpperCase()}: ${value}`)
-        });
+        });        
     });
+};
+
+// function to change data based on user option from dropdown menu
+function optionChanged(sample) {
+    createChart(sample);
+    createMetaData(sample);
 };
 
 // call function init
