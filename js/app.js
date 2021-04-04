@@ -74,15 +74,32 @@ function createChart(sample) {
             margin: {
                 t: 30,
                 l: 150
-            },
+            }
         };
         Plotly.newPlot("bar", barData, barLayout)
     });
 };
 
 // function to display metadata
-// function createMetaData(sample) {
-// }
+function createMetaData(sample) {
+    d3.json("samples.json").then(function(data) {
+        let metaData = data.metadata;
+        let resultsArray = metaData.filter(function(data) {
+            return data.id === sample;
+        });
+        let result = resultsArray[0];
+        let panel = d3.select("#sample-metadata");
+
+        // reset exisisting metadata
+        panel.html("");
+        
+        // loop through each object
+        Object.defineProperties(result).forEach(function([key, value]){
+            console.log(key, value)
+        })
+
+    })
+}
 
 
 // call function init
