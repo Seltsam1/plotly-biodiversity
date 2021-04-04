@@ -70,7 +70,10 @@ function createChart(sample) {
             x: sample_values.slice(0,10).reverse(),
             text: otu_labels.slice(0,10).reverse(),
             type: "bar",
-            orientation: "h"
+            orientation: "h",
+            marker: {
+                color: "4B0082"
+            }
         }];
         let barLayout = {
             title: `Top 10 Cultures for ID ${sample}`,
@@ -130,7 +133,28 @@ function createGauge(sample) {
         let pathY = String(y);
         let pathEnd = " Z";
         let path = mainPath.concat(pathX, space, pathY, pathEnd);
-        console.log(path);
+
+        // create guage chart based on path
+        let guageData = [{
+            type: "scatter",
+            x: [0],
+            y: [0],
+            marker: {
+                size: 12,
+                color: "850000"
+            },
+            showLegend: false,
+            name: "Freq",
+            text: value,
+            hoverinfo: "text+name"
+            },
+            {values: [(50 / 9), (50 / 9), (50 / 9), (50 / 9),
+                (50 / 9), (50 / 9), (50 / 9), (50 / 9),
+                (50 / 9), (50 / 9) 
+            
+            ]}
+        
+        ]
 
 
 
