@@ -22,7 +22,7 @@ function init() {
 };
 
 
-// function to create bar chart
+// function to create charts
 function createChart(sample) {
     d3.json("samples.json").then(function(data) {
         let samples = data.samples;
@@ -36,6 +36,29 @@ function createChart(sample) {
         console.log(otu_ids);
         console.log(otu_labels);
         console.log(sample_values);
+
+        let bubbleData = [{
+            x: otu_ids,
+            y: sample_values,
+            text: otu_labels,
+            mode: "markets",
+            marker: {
+                size: sample_values,
+                color: otu_ids,
+                colorscale: "Electric"
+            }
+        }];
+
+        let bubbleLayout = {
+            title: (`Bacteria Cultures for Subject ${sample}`),
+            margin: {t: 30},
+            hovermode: "closest",
+            xaxis: {
+                title: "OTU (Operational Taxonomic Unit) ID"
+            }
+        };
+
+        Plotly.newPlot("bubble", bubbleData, bubbleLayout);
     });
 };
 
